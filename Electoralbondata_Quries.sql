@@ -1,3 +1,130 @@
+/************************************************************============ Electoral Bonds Database =========== *******************************************************************
+ -- Database created by: Kotla Suresh
+ -- Database Name: electoralbonddata    
+ -- Author of Queries : Kotla Suresh
+ -- Organization : Careerpedia
+ -- Description: This is a database which has electoral bonds data provided by Govenement of INDIA after Supreme Court Ruling. 
+ -- Date : 19-May-2024
+**********************************************************************************************************************************************************************************/
+
+/*************************************************************************Tables and Data Description*****************************************************************************
+
+The data was provided as 2 Tables and extra data recarding the bank branches has been extracted from GOVT website and the overall data is distributed in 4 tables. So that the 
+whole data is in 3rd Normalization Form. 
+
+ Tables in the database: 
+
+
+The data base has 4 tables : `SHOW TABLES` 
+
++-------------------------------+
+| Tables_in_electoralbonddata   |
++-------------------------------+
+| bankdata                      |
+| bonddata                      |
+| donordata                     |
+| receiverdata                  |
++-------------------------------+
+
+#### Bonddata
+
++--------------+------------+------+-----+---------+-------+
+| Field        | Type       | Null | Key | Default | Extra |
++--------------+------------+------+-----+---------+-------+
+| Unique_key   | varchar(8) | NO   | PRI | NULL    |       |
+| Denomination | int        | YES  |     | NULL    |       |
++--------------+------------+------+-----+---------+-------+
+
+
++------------+--------------+
+| Unique_key | Denomination |
++------------+--------------+
+| OC10000    |     10000000 |
+| OC10001    |     10000000 |
+| OC10002    |     10000000 |
+| OC10003    |     10000000 |
+| OC10004    |     10000000 |
++------------+--------------+
+
+
+#### bankdata
+
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| branchCodeNo | int          | NO   | PRI | NULL    |       |
+| STATE        | varchar(50)  | YES  |     | NULL    |       |
+| Address      | varchar(255) | YES  |     | NULL    |       |
+| CITY         | varchar(30)  | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+
++--------------+----------------------------------+-----------------------------------------------------------------------------------------------------------------------------+-------------+
+| branchCodeNo | STATE                            | Address                                                                                                                     | CITY        |
++--------------+----------------------------------+-----------------------------------------------------------------------------------------------------------------------------+-------------+
+|            1 | West Bengal and Andaman& Nicobar | Kolkata Main Branch,Samriddhi Bhawan1, Strand Road, Kolkata, West Bengal,District :Kolkata. State: West Bengal.Pin : 700001 | Kolkata     |
+|            2 | Tripura                          | Agartala BranchHari Ganga Basak Road,Agartala, District: Tripura (W), Tripura, Pin: 799001                                  | Agartala    |
+|           41 | Odisha                           | Bhubaneswar Main BranchP.B.No.14, BhubaneswarBhubaneswar, Orissa. District : KhurdaState: Odisha, Pin : 751001              | Bhubaneswar |
+|           78 | Assam                            | Guwahati Branch,Pan Bazar,MG Road, Kamrup, Guwahati.  Pin: 781001                                                           | Guwahati    |
+|           92 | Manipur                          | lmphal BranchM G Avenue, lmphal west, Manipur, Pin: 795001                                                                  | Imphal      |
++--------------+----------------------------------+-----------------------------------------------------------------------------------------------------------------------------+-------------+
+
+
+#### DonorData
+
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| Urn           | varchar(30)  | YES  |     | NULL    |       |
+| JournalDate   | date         | YES  |     | NULL    |       |
+| PurchaseDate  | date         | YES  |     | NULL    |       |
+| ExpiryDate    | date         | YES  |     | NULL    |       |
+| Purchaser     | varchar(255) | YES  |     | NULL    |       |
+| PayBranchCode | int          | YES  | MUL | NULL    |       |
+| PayTeller     | int          | YES  |     | NULL    |       |
+| Unique_key    | varchar(8)   | NO   | PRI | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+
++-------------------------+-------------+--------------+------------+-----------------------------------+---------------+-----------+------------+
+| Urn                     | JournalDate | PurchaseDate | ExpiryDate | Purchaser                         | PayBranchCode | PayTeller | Unique_key |
++-------------------------+-------------+--------------+------------+-----------------------------------+---------------+-----------+------------+
+| 00847202204080000002387 | 2022-04-08  | 2022-04-08   | 2022-04-22 | KOYA AND COMPANY CONSTRUCTION LTD |           847 |   3898296 | OC10000    |
+| 00300202110070000001967 | 2021-10-07  | 2021-10-07   | 2021-10-21 | K RAHEJA CORP PVT LTD             |           300 |   7905165 | OC10001    |
+| 00300202110070000001984 | 2021-10-07  | 2021-10-07   | 2021-10-21 | CAPSTAN TRADING LLP               |           300 |   7905165 | OC10002    |
+| 00300202110070000001967 | 2021-10-07  | 2021-10-07   | 2021-10-21 | K RAHEJA CORP PVT LTD             |           300 |   7905165 | OC10003    |
+| 00300202110070000001984 | 2021-10-07  | 2021-10-07   | 2021-10-21 | CAPSTAN TRADING LLP               |           300 |   7905165 | OC10004    |
++-------------------------+-------------+--------------+------------+-----------------------------------+---------------+-----------+------------+
+
+
+#### Receiverdata
+
++----------------+--------------+------+-----+---------+-------+
+| Field          | Type         | Null | Key | Default | Extra |
++----------------+--------------+------+-----+---------+-------+
+| DateEncashment | date         | YES  |     | NULL    |       |
+| PartyName      | varchar(255) | YES  |     | NULL    |       |
+| AccountNum     | varchar(50)  | YES  |     | NULL    |       |
+| PayBranchCode  | int          | YES  | MUL | NULL    |       |
+| PayTeller      | int          | YES  |     | NULL    |       |
+| Unique_key     | varchar(8)   | NO   | PRI | NULL    |       |
++----------------+--------------+------+-----+---------+-------+
+
+
++----------------+------------------------+-------------+---------------+-----------+------------+
+| DateEncashment | PartyName              | AccountNum  | PayBranchCode | PayTeller | Unique_key |
++----------------+------------------------+-------------+---------------+-----------+------------+
+| 2022-04-12     | BHARAT RASHTRA SAMITHI | *******7477 |           847 |   3898296 | OC10000    |
+| 2021-10-08     | BHARAT RASHTRA SAMITHI | *******7477 |           847 |   6417329 | OC10001    |
+| 2021-10-08     | BHARAT RASHTRA SAMITHI | *******7477 |           847 |   6417329 | OC10002    |
+| 2021-10-08     | BHARAT RASHTRA SAMITHI | *******7477 |           847 |   6417329 | OC10003    |
+| 2021-10-08     | BHARAT RASHTRA SAMITHI | *******7477 |           847 |   6417329 | OC10004    |
++----------------+------------------------+-------------+---------------+-----------+------------+
+
+ *********************************************************************************************************************************************************************************/ 
+
+
+/***************************************************************************Questions On Electoral Bonds***************************************************************************
+
+
 create database electoralbonddata;
 use electoralbonddata;
 show tables;
@@ -334,6 +461,10 @@ on r.Unique_key = b.Unique_key
 left join bankdata bd
 on bd.branchCodeNo = r.PayBranchCode
 group by partyName,CITY;
+
+
+
+
 
 
 
