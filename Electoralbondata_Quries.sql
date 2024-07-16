@@ -390,8 +390,8 @@ group by PayTeller
 select * from emp 
 where cnt =(select min(cnt) from emp);
 
--- Some more Questions you can try answering Once you are done with
--- above questions.
+## Some more Questions you can try answering Once you are done with
+## above questions.
 
 -- 1. Tell me total how many bonds are created?
 select sum(Denomination) as total_bonds from bonddata b
